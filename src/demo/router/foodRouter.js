@@ -94,22 +94,23 @@ router.post('/findKeyWord',(req,res)=>{
  * @apiSuccess  {String}    ff
  */
 router.post('/del',(req,res)=>{
-    let {_id,name, price ,desc ,typename ,typeid ,img} =req.body
+    let {_id} = req.body
     //删除多个时
     //foodModel.remove({_id:[id1,id2]})
-    foodModel.updateOne({_id},{name, price ,desc ,typename ,typeid ,img})
+    foodModel.remove({_id})
     .then((data)=>{
-        res.send({err:0,msg:"修改OK"})
+        res.send({err:0,msg:"删除 OK"})
     })
     .catch((err)=>{
         console.log(err)
-        res.send({err:0,msg:'修改失败'})
+        res.send({err:0,msg:'删除失败'})
     })
+    
     
 })
 /**
  * @api {post} /food/update 修改
- * @apiName id删除
+ * @apiName 修改
  * @apiGroup    Food
  * 
  * @apiParam  {String} name 菜名.  
@@ -123,19 +124,44 @@ router.post('/del',(req,res)=>{
  * @apiSuccess  {String}    ff
  * @apiSuccess  {String}    ff
  */
-router.post('/del',(req,res)=>{
-    let {_id} = req.body
-    //删除多个时
-    //foodModel.remove({_id:[id1,id2]})
-    foodModel.remove({_id})
-    .then((data)=>{
-        console.log(data)
-        res.send({err:0,msg:data})
+router.post('/update',(req,res)=>{
+    let {_id,name, price ,desc ,typename ,typeid ,img} =req.body
+
+    foodModel.updateOne({_id},{name, price ,desc ,typename ,typeid ,img})
+    .then(()=>{
+        res.send({err:0,msg:"修改OK"})
     })
     .catch((err)=>{
         console.log(err)
-        res.send({err:0,msg:'删除失败'})
+        res.send({err:0,msg:'修改失败'})
     })
     
 })
+
+/**
+ * @api {post} /food/getInfoByPage 分页
+ * @apiName 分页
+ * @apiGroup    Food
+ * 
+ * @apiParam  {Number} pagesize 每页数据条数.  
+ * @apiParam  {Number} page 页数.   
+ * 
+ * @apiSuccess  {String}    ff
+ */
+router.post('/getInfoByPage',(req,res)=>{
+    //如果没有pagesize则默认为5使用了短路或
+    let pagesize = req.body.pagesize || 5 
+    let page = req.body.pagesize || 1
+    //limit选取五条,skip跳过n条
+    foodModel.find().limit(Number(pagesize)).skip(Number((page-1)*5))
+    .then((data)=>{
+        res.send({err:0,msg:"查询OK",data:data})
+    })
+    .catch((err)=>{
+        console.log(err)
+        res.send({err:0,msg:'查询失败'})
+    })
+    
+})
+
 module.exports = router

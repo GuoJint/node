@@ -3,9 +3,19 @@ const router = express.Router()
 const Mail = require('../utils/mail')
 //数据模型
 const User = require('../db/model/userModel')
+const JWT = require('../utils/jwt')
+
 
 let codes = {}
 let sendTime = true
+
+
+
+router.post('/logOut',(req,res)=>{
+    req.session.destroy() //销毁保存的session
+    res.send({err:0,msg:'已退出'})
+})
+
 
 /**
  * @api {post} /user/reg 用户注册
@@ -69,7 +79,13 @@ router.post('/login',(req,res)=>{
     .then((data)=>{
         console.log(data)
         if(data.length>0){
-            res.send({err:0,msg:'登录成功'})
+            //使用sessioncookie方法
+            // req.session.login = true
+            // req.session.name = us
+            
+            //创建token然后将token返回给前端
+            let token = JWT.checkToken({login:true,name:us})
+            res.send({err:0,msg:'登录成功',token:token})
         }else{
             res.send({err:-2,msg:'用户名或密码输入错误'})
         }

@@ -5,13 +5,14 @@ const multer = require('multer')
 var storage = multer.diskStorage({
     //指定文件路径
     destination:function(req,file,cb){
-        cb(null,'./uploads')
+        cb(null,'./static')
     },
     //指定文件名
     //文件名重复覆盖
     //后缀名发生改变
     filename:function(req,file,cb){
-        let ext = file.originalname.split('.')[1]
+        let exts = file.originalname.split('.')
+        let ext = exts[exts.length-1]
         let tmpname = (new Date()).getTime()+parseInt(Math.random()*9999)
         cb(null,`${tmpname}.${ext}`)
     }
@@ -54,6 +55,8 @@ router.post('/upload',upload.single('hehe'),(req,res)=>{
 })
 module.exports = router
 
+//创建静态目录static,在static中放入静态资源
+//在server.js中通过path拼接把public转为static
 //创建file路由，引入express，router与multer
 //根据multer插件文档进行书写
 //写入上传接口

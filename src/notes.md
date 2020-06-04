@@ -113,5 +113,38 @@ port：确定服务器里某一个程序
     方法：通过request插件来进行服务器间的访问
   
   ### 图片上传
+    #### 注意要点
+      1.设置图片的名称与后缀
 
+  ### websocket
+    聊天室实现可以通过与后端创建多个连接通过广播的形式来进行发送信息。
+
+    创建一个聊天室的连接，当点击进入聊天室后与后端ws进行连接。
+    一个人发送消息给后端，后端再把这个消息转发给其他与其连接的客户端
+
+    什么时候使用长连接
+    1.实时刷新
+    2.服务器端发起数据
+
+    时间换空间 空间换时间
   
+  ### 身份验证
+
+  1.登录时候 发布一个加密字符串 （用户相关信息）给前端
+  2.调用其他接口 将加密字符串作为参数传递给服务器
+  3.根据权限进行验证
+
+  session + cookie
+  cookie-parser 解析cookie
+  express-session 
+
+  //引入cookie-parser  express-session
+  配置session选项，拦截除登录路由外的其他路由，并在回调函数中进行session 的判断.
+  cookie会在前端自动添加，并自动携带
+
+  跨域时cookie和session不能使用
+
+  JWT
+  引入jsonwebtoken 创建工具util下的jwt.js
+  在jwt中引入，并创建createtoken和checktoken函数在createtoken函数中返回jwt.sign颁发的token,并在login方法中将token传给前端
+  在其他路由中引入checktoken进行拦截判断token是否合法。同时可以在创建时的palyload中添加创建时间（时间戳）和过期时间，两时间相加然后与当前时间对比来判断是否过期

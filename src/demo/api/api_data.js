@@ -29,6 +29,349 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/food/del",
+    "title": "id删除",
+    "name": "id删除",
+    "group": "Food",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "ff",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./router/foodRouter.js",
+    "groupTitle": "Food"
+  },
+  {
+    "type": "post",
+    "url": "/file/upload",
+    "title": "上传图片",
+    "name": "上传图片",
+    "group": "Food",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pagesize",
+            "description": "<p>每页数据条数.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>页数.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "ff",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./router/fileRouter.js",
+    "groupTitle": "Food"
+  },
+  {
+    "type": "post",
+    "url": "/food/update",
+    "title": "修改",
+    "name": "修改",
+    "group": "Food",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>菜名.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "price",
+            "description": "<p>价格.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "desc",
+            "description": "<p>描述.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "typename",
+            "description": "<p>类型名称.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "typeid",
+            "description": "<p>类型id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "img",
+            "description": "<p>菜图.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>id.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "ff",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./router/foodRouter.js",
+    "groupTitle": "Food"
+  },
+  {
+    "type": "post",
+    "url": "/food/findKeyWord",
+    "title": "关键字查询",
+    "name": "关键字查询",
+    "group": "Food",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "kw",
+            "description": "<p>关键字.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "ff",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./router/foodRouter.js",
+    "groupTitle": "Food"
+  },
+  {
+    "type": "post",
+    "url": "/food/findType",
+    "title": "分类查询",
+    "name": "分类查询",
+    "group": "Food",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "typeid",
+            "description": "<p>类型id.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "ff",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./router/foodRouter.js",
+    "groupTitle": "Food"
+  },
+  {
+    "type": "post",
+    "url": "/food/getInfoByPage",
+    "title": "分页",
+    "name": "分页",
+    "group": "Food",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pagesize",
+            "description": "<p>每页数据条数.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>页数.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "ff",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./router/foodRouter.js",
+    "groupTitle": "Food"
+  },
+  {
+    "type": "post",
+    "url": "/food/reg",
+    "title": "添加菜品",
+    "name": "添加菜品",
+    "group": "Food",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>菜名.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "price",
+            "description": "<p>价格.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "desc",
+            "description": "<p>描述.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "typename",
+            "description": "<p>类型名称.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "typeid",
+            "description": "<p>类型id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "img",
+            "description": "<p>菜图.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "ff",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./router/foodRouter.js",
+    "groupTitle": "Food"
+  },
+  {
+    "type": "post",
     "url": "/user/getMailCode",
     "title": "发送邮箱验证码",
     "name": "getMai",

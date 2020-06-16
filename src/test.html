@@ -1,0 +1,38 @@
+，直接上代码吧，比较简单，但也非常实用，用来测试非常方便。所以就不用什么目录了，直接就来了。
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link type="test/css" href="css/style.css" rel="stylesheet">
+
+<body>
+
+	<input type="text" style="width:600px;height:30px;font-size:14px;" id="urlText" value="" />
+	<br>
+	<input type="button" style="margin: 10px";  id="cors" value="判断是否可访问"/>
+
+<p>http://sz07.hrzhao.com/UEP/scenetest/GetSceneTestList.mt</p>
+<p>10.209.158.160:8082/UEP/scenetest/GetSceneTestList.mt</p>
+<p>10.209.158.160:9092/UEP/scenetest/GetSceneTestList.mt</p>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>  
+<script type="text/javascript">
+	$(function(){
+	$("#cors").click(
+		function(){
+			var url2 = $("#urlText").val();
+			$.post({
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				url:url2,
+				data: "/rAIeKeSBG1LV+XoIq82/O",
+				success:function(data){
+					alert("success");
+				}
+			})
+		});
+	});
+</script>
+</body>
+</html>

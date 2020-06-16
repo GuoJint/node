@@ -3,7 +3,8 @@ const router = express.Router()
 const Mail = require('../utils/mail')
 //数据模型
 const User = require('../db/model/userModel')
-const JWT = require('../utils/jwt')
+const JWT = require('../utils/jwt') 
+
 
 
 let codes = {}
@@ -31,15 +32,17 @@ router.post('/logOut',(req,res)=>{
  */
 router.post('/reg',(req,res)=>{
     //获取数据
-    let {user,psw,mail,code} = req.body
+    let {user,psw,Mail,code} = req.body
     
-    
-    if(user&&psw&&code&&mail){
-        console.log(codes)
-        console.log(codes[mail]+"  sdsda  "+code)
-        if(codes[mail] != code){ return res.send({err:-4,msg:'验证码或邮箱错误'})}
+    console.log(user,psw,Mail,code)
+    if(user&&psw&&code&&Mail){
+        console.log(codes.Mail)
+        console.log(code)
+        // console.log(codes[Mail]+"  sdsda  "+code)
+        if(codes.Mail != code){ return res.send({err:-4,msg:'验证码或邮箱错误'})}
         User.find({user})
         .then((data)=>{
+            console.log('1')
             if(data.length===0){
                 return User.insertMany({user:user,psw:psw})
             }else{
@@ -48,7 +51,8 @@ router.post('/reg',(req,res)=>{
             }
         })
         .then(()=>{
-            res.send({err:1,msg:'ok'})
+            console.log('2')
+            res.send({err:1,msg:'注册成功'})
         })
         .catch((err)=>{
             console.log(err)
@@ -74,7 +78,7 @@ router.post('/reg',(req,res)=>{
 
 router.post('/login',(req,res)=>{
     let {user,psw} = req.body
-    if(!us||!psw){ return res.send({err:-1,msg:'参数错误'})}
+    if(!user||!psw){ return res.send({err:-1,msg:'参数错误'})}
     User.find({user,psw})
     .then((data)=>{
         console.log(data)
@@ -84,7 +88,7 @@ router.post('/login',(req,res)=>{
             // req.session.name = us
             
             //创建token然后将token返回给前端
-            let token = JWT.checkToken({login:true,name:us})
+            let token = JWT.createToekn({login:true,name:user})
             res.send({err:0,msg:'登录成功',token:token})
         }else{
             res.send({err:-2,msg:'用户名或密码输入错误'})
@@ -108,11 +112,12 @@ router.post('/login',(req,res)=>{
 router.post('/getMailCode',(req,res)=>{
     if(sendTime){
         let {mail} = req.body
+        // console.log(mail)
         let code = parseInt(Math.random() * 10000) //产生随机验证码
         Mail.send(mail,code)
         .then(()=>{
-            codes[mail] = code
-            console.log(codes[mail])
+            codes.Mail = code
+            // console.log(codes[Mail])
             res.send({err:0,msg:'验证码发送成功'})
             sendTime = false
             setTimeout(() => {
@@ -126,5 +131,8 @@ router.post('/getMailCode',(req,res)=>{
         res.send({err:-5,msg:'五分钟内不能重复发送'})
     }
     
+})
+router.post('/test',(req,res)=>{
+    res.send('ok')
 })
 module.exports = router
